@@ -27,7 +27,7 @@ A flexible tool for generating arithmetic datasets with precise control over two
 
 ```bash
 pip install -r requirements.txt
-python generate_arithmetic_data.py -n 1000
+python generate_arithmetic_data.py -n 10000
 ```
 
 This creates 5 files with matched IDs (so the problems are aligned):
@@ -42,30 +42,30 @@ This creates 5 files with matched IDs (so the problems are aligned):
 ### Basic Generation
 ```bash
 # Default settings (50-50 split for all parameters)
-python generate_arithmetic_data.py -n 1000
+python generate_arithmetic_data.py -n 10000
 
 # HELM format
-python generate_arithmetic_data.py -n 1000 --output-format helm
+python generate_arithmetic_data.py -n 10000 --output-format helm
 ```
 
 ### Control difficulty
 ```bash
 # Mostly 3-term problems with 3-digit numbers
-python generate_arithmetic_data.py -n 1000 \
+python generate_arithmetic_data.py -n 10000 \
   --terms 0.3 0.7 \
   --digits 0.2 0.8 \
   --carry-percentage 0.7
 
 # Only 2-digit solutions
-python generate_arithmetic_data.py -n 1000 --solution-digits 2
+python generate_arithmetic_data.py -n 10000 --solution-digits 2
 
 # Higher carry/borrow percentage
-python generate_arithmetic_data.py -n 1000 --carry-percentage 0.8
+python generate_arithmetic_data.py -n 10000 --carry-percentage 0.8
 ```
 
 ### Optional Constraints
 ```bash
-python generate_arithmetic_data.py -n 1000 \
+python generate_arithmetic_data.py -n 10000 \
   --avoid-repeated-digits \
   --avoid-clean-multiples \
   --avoid-reverse-pairs
@@ -73,7 +73,7 @@ python generate_arithmetic_data.py -n 1000 \
 
 ### Reproducible Generation
 ```bash
-python generate_arithmetic_data.py -n 1000 --seed 42
+python generate_arithmetic_data.py -n 10000 --seed 42
 ```
 
 ## Command-Line Arguments
