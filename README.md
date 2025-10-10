@@ -1,43 +1,43 @@
-# Arithmetic Problem Dataset Generator
+# Arithmetic problem dataset generator
 
-A flexible tool for generating arithmetic datasets with precise control over difficulty and format. Ideal for training and evaluating language models on mathematical reasoning.
+A flexible tool for generating arithmetic datasets with precise control over two axes: difficulty (n° digits, operands, carry/borrow) and format (numeric, verbal-English, verbal-Spanish, verbal-Italian, embedded-in-context).
 
 ## Features
 
-**Difficulty Control:**
+**Difficulty:**
 - Number of terms (2-term: `32 + 41` vs 3-term: `32 + 41 - 25`)
 - Number of digits (2-digit: `32` vs 3-digit: `320`)
 - Carry/borrow operations (controllable percentage)
 - Solution digit filtering
 
-**Multiple Formats (5 total):**
+**Formats (5 total):**
 - Numeric: `32 + 41 =`
 - English: `thirty-two plus forty-one equals`
 - Spanish: `treinta y dos más cuarenta y uno es igual a`
 - Italian: `trentadue più quarantuno fa`
 - Embedded: `Alex has 32 apples. Emma has 41 apples. How many apples do they have together?`
 
-**Output Formats:**
+**Output formats:**
 - JSON (default): Standard JSON arrays
 - HELM: JSONL format compatible with Stanford's HELM benchmark
 
-**Dataset Splits:** 80% train, 10% validation, 10% test (stratified to preserve statistics)
+**Dataset splits:** 80% train, 10% validation, 10% test (stratified)
 
-## Quick Start
+## Quick start
 
 ```bash
 pip install -r requirements.txt
 python generate_arithmetic_data.py -n 1000
 ```
 
-This creates 5 files with matched IDs:
+This creates 5 files with matched IDs (so the problems are aligned):
 - `arith_dataset_numeric.json`
 - `arith_dataset_english.json`
 - `arith_dataset_spanish.json`
 - `arith_dataset_italian.json`
 - `arith_dataset_embedded.json`
 
-## Usage Examples
+## Usage examples
 
 ### Basic Generation
 ```bash
@@ -48,7 +48,7 @@ python generate_arithmetic_data.py -n 1000
 python generate_arithmetic_data.py -n 1000 --output-format helm
 ```
 
-### Control Difficulty
+### Control difficulty
 ```bash
 # Mostly 3-term problems with 3-digit numbers
 python generate_arithmetic_data.py -n 1000 \
