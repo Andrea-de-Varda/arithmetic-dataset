@@ -14,6 +14,7 @@ import argparse
 import json
 import random
 import hashlib
+import os
 from typing import List, Dict, Tuple, Optional
 from collections import defaultdict
 from num2words import num2words
@@ -570,13 +571,17 @@ def save_dataset_helm(problems: List[Dict], output_prefix: str):
     for i, problem in enumerate(problems):
         problem['id'] = f"prob_{i:06d}"
 
+    # Ensure target directory exists: data/HELM/
+    base_dir = os.path.join('data', 'HELM')
+    os.makedirs(base_dir, exist_ok=True)
+    
     # Add 'HELM' to filenames to clearly indicate the format
     filenames = {
-        'numeric': f'{output_prefix}_HELM_numeric.jsonl',
-        'en': f'{output_prefix}_HELM_english.jsonl',
-        'es': f'{output_prefix}_HELM_spanish.jsonl',
-        'it': f'{output_prefix}_HELM_italian.jsonl',
-        'embedded': f'{output_prefix}_HELM_embedded.jsonl'
+        'numeric': os.path.join(base_dir, f'{output_prefix}_HELM_numeric.jsonl'),
+        'en': os.path.join(base_dir, f'{output_prefix}_HELM_english.jsonl'),
+        'es': os.path.join(base_dir, f'{output_prefix}_HELM_spanish.jsonl'),
+        'it': os.path.join(base_dir, f'{output_prefix}_HELM_italian.jsonl'),
+        'embedded': os.path.join(base_dir, f'{output_prefix}_HELM_embedded.jsonl')
     }
 
     # Language names for metadata
@@ -688,13 +693,17 @@ def save_dataset(problems: List[Dict], output_prefix: str):
             'n_digits': problem['n_digits']
         })
     
+    # Ensure target directory exists: data/json/
+    base_dir = os.path.join('data', 'json')
+    os.makedirs(base_dir, exist_ok=True)
+    
     # Save each dataset
     filenames = {
-        'numeric': f'{output_prefix}_numeric.json',
-        'en': f'{output_prefix}_english.json',
-        'es': f'{output_prefix}_spanish.json',
-        'it': f'{output_prefix}_italian.json',
-        'embedded': f'{output_prefix}_embedded.json'
+        'numeric': os.path.join(base_dir, f'{output_prefix}_numeric.json'),
+        'en': os.path.join(base_dir, f'{output_prefix}_english.json'),
+        'es': os.path.join(base_dir, f'{output_prefix}_spanish.json'),
+        'it': os.path.join(base_dir, f'{output_prefix}_italian.json'),
+        'embedded': os.path.join(base_dir, f'{output_prefix}_embedded.json')
     }
     
     for format_name, dataset in datasets.items():
