@@ -557,25 +557,25 @@ def split_dataset(problems: List[Dict],
 def save_dataset_helm(problems: List[Dict], output_prefix: str):
     """
     Save dataset in HELM (Holistic Evaluation of Language Models) format
-    
+
     HELM format uses JSONL (JSON Lines) where each line is a JSON object
     Creates 5 files: numeric, English, Spanish, Italian, embedded-in-context
     """
     formatter = DatasetFormatter()
-    
+
     # Assign unique IDs
     for i, problem in enumerate(problems):
         problem['id'] = f"prob_{i:06d}"
-    
-    # HELM filenames
+
+    # Add 'HELM' to filenames to clearly indicate the format
     filenames = {
-        'numeric': f'{output_prefix}_numeric.jsonl',
-        'en': f'{output_prefix}_english.jsonl',
-        'es': f'{output_prefix}_spanish.jsonl',
-        'it': f'{output_prefix}_italian.jsonl',
-        'embedded': f'{output_prefix}_embedded.jsonl'
+        'numeric': f'{output_prefix}_HELM_numeric.jsonl',
+        'en': f'{output_prefix}_HELM_english.jsonl',
+        'es': f'{output_prefix}_HELM_spanish.jsonl',
+        'it': f'{output_prefix}_HELM_italian.jsonl',
+        'embedded': f'{output_prefix}_HELM_embedded.jsonl'
     }
-    
+
     # Language names for metadata
     lang_names = {
         'numeric': 'numeric',
@@ -584,7 +584,7 @@ def save_dataset_helm(problems: List[Dict], output_prefix: str):
         'it': 'italian',
         'embedded': 'embedded-in-context'
     }
-    
+
     # Create HELM instances for each format
     for format_key, filename in filenames.items():
         with open(filename, 'w', encoding='utf-8') as f:
@@ -596,7 +596,7 @@ def save_dataset_helm(problems: List[Dict], output_prefix: str):
                     prompt, answer = formatter.format_embedded_context(problem)
                 else:
                     prompt, answer = formatter.format_verbal(problem, language=format_key)
-                
+
                 # Create HELM instance with nested structure
                 helm_instance = {
                     'input': {
@@ -613,12 +613,12 @@ def save_dataset_helm(problems: List[Dict], output_prefix: str):
                     'split': problem['split'],
                     'id': problem['id']
                 }
-                
+
                 # Write as JSON line
                 f.write(json.dumps(helm_instance, ensure_ascii=False) + '\n')
-        
+
         print(f"Saved {filename} ({len(problems)} problems)")
-    
+
     # Print statistics
     _print_dataset_statistics(problems)
 
