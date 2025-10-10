@@ -39,7 +39,7 @@ This creates 5 files with matched IDs (so the problems are aligned):
 
 ## Usage examples
 
-### Basic Generation
+### Basic generation
 ```bash
 # Default settings (50-50 split for all parameters)
 python generate_arithmetic_data.py -n 10000
@@ -63,7 +63,7 @@ python generate_arithmetic_data.py -n 10000 --solution-digits 2
 python generate_arithmetic_data.py -n 10000 --carry-percentage 0.8
 ```
 
-### Optional Constraints
+### Optional constraints
 ```bash
 python generate_arithmetic_data.py -n 10000 \
   --avoid-repeated-digits \
@@ -71,12 +71,12 @@ python generate_arithmetic_data.py -n 10000 \
   --avoid-reverse-pairs
 ```
 
-### Reproducible Generation
+### Reproducible generation
 ```bash
 python generate_arithmetic_data.py -n 10000 --seed 42
 ```
 
-## Command-Line Arguments
+## Command-line arguments
 
 **Dataset Size:**
 - `-n, --num-problems`: Number of problems to generate (default: 1000)
@@ -97,9 +97,9 @@ python generate_arithmetic_data.py -n 10000 --seed 42
 - `--output-format`: `json` (default) or `helm` (JSONL format)
 - `--seed`: Random seed for reproducibility
 
-## Output Format
+## Output format
 
-### JSON Format (Default)
+### JSON format (default)
 
 Each file contains an array of problems:
 
@@ -116,7 +116,7 @@ Each file contains an array of problems:
 }
 ```
 
-### HELM Format (JSONL)
+### HELM format (JSONL)
 
 Each line is a JSON object (Stanford HELM benchmark compatible):
 
@@ -138,7 +138,7 @@ Each line is a JSON object (Stanford HELM benchmark compatible):
 }
 ```
 
-### Reading Files
+### Reading files
 
 **Python (JSON):**
 ```python
@@ -164,7 +164,7 @@ for p in problems:
     print(f"{p['input']['text']} -> {p['references'][0]['output']['text'].strip()}")
 ```
 
-## Dataset Statistics
+## Dataset statistics
 
 The included dataset (10,000 problems, seed 42):
 - Train: 7,996 (80%), Val: 997 (10%), Test: 1,007 (10%)
