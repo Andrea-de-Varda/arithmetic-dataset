@@ -466,6 +466,8 @@ class DatasetFormatter:
             # Three-term addition
             num1, num2, num3 = operands[0], operands[1], operands[2]
             char3 = temp_rng.choice(characters)
+            while char3 == char1 or char3 == char2:
+                char3 = temp_rng.choice(characters)
             prompt = f"{char1} has {num1} {obj_plural}, {char2} has {num2} {obj_plural}, and {char3} has {num3} {obj_plural}. How many {obj_plural} do they have in total?"
             answer = f' {result}'
             
