@@ -1861,7 +1861,7 @@
   },
   {
     "id": "prob_000186",
-    "prompt": "James has 49 dolls, Ella has 12 dolls, and James has 92 dolls. How many dolls do they have in total?",
+    "prompt": "James has 49 dolls, Ella has 12 dolls, and Amelia has 92 dolls. How many dolls do they have in total?",
     "answer": " 153",
     "ground_truth": 153,
     "split": "train",
@@ -2331,7 +2331,7 @@
   },
   {
     "id": "prob_000233",
-    "prompt": "Isabella has 571 balloons, Alex has 573 balloons, and Alex has 689 balloons. How many balloons do they have in total?",
+    "prompt": "Isabella has 571 balloons, Alex has 573 balloons, and Victoria has 689 balloons. How many balloons do they have in total?",
     "answer": " 1833",
     "ground_truth": 1833,
     "split": "train",
@@ -6371,7 +6371,7 @@
   },
   {
     "id": "prob_000637",
-    "prompt": "Alex has 12 toy cars, Lily has 31 toy cars, and Lily has 15 toy cars. How many toy cars do they have in total?",
+    "prompt": "Alex has 12 toy cars, Lily has 31 toy cars, and Harper has 15 toy cars. How many toy cars do they have in total?",
     "answer": " 58",
     "ground_truth": 58,
     "split": "val",
@@ -8031,7 +8031,7 @@
   },
   {
     "id": "prob_000803",
-    "prompt": "Abigail has 29 cookies, Olivia has 53 cookies, and Abigail has 91 cookies. How many cookies do they have in total?",
+    "prompt": "Abigail has 29 cookies, Olivia has 53 cookies, and Lily has 91 cookies. How many cookies do they have in total?",
     "answer": " 173",
     "ground_truth": 173,
     "split": "train",
@@ -8661,7 +8661,7 @@
   },
   {
     "id": "prob_000866",
-    "prompt": "Matthew has 92 toy cars, Evelyn has 92 toy cars, and Matthew has 79 toy cars. How many toy cars do they have in total?",
+    "prompt": "Matthew has 92 toy cars, Evelyn has 92 toy cars, and Victoria has 79 toy cars. How many toy cars do they have in total?",
     "answer": " 263",
     "ground_truth": 263,
     "split": "train",
@@ -10691,7 +10691,7 @@
   },
   {
     "id": "prob_001069",
-    "prompt": "Ethan has 34 stamps, Ava has 41 stamps, and Ava has 60 stamps. How many stamps do they have in total?",
+    "prompt": "Ethan has 34 stamps, Ava has 41 stamps, and Henry has 60 stamps. How many stamps do they have in total?",
     "answer": " 135",
     "ground_truth": 135,
     "split": "train",
@@ -12391,7 +12391,7 @@
   },
   {
     "id": "prob_001239",
-    "prompt": "Ella has 92 books, Aiden has 61 books, and Aiden has 14 books. How many books do they have in total?",
+    "prompt": "Ella has 92 books, Aiden has 61 books, and Logan has 14 books. How many books do they have in total?",
     "answer": " 167",
     "ground_truth": 167,
     "split": "train",
@@ -12871,7 +12871,7 @@
   },
   {
     "id": "prob_001287",
-    "prompt": "Jacob has 98 cards, Madison has 97 cards, and Jacob has 54 cards. How many cards do they have in total?",
+    "prompt": "Jacob has 98 cards, Madison has 97 cards, and Jackson has 54 cards. How many cards do they have in total?",
     "answer": " 249",
     "ground_truth": 249,
     "split": "train",
@@ -12901,7 +12901,7 @@
   },
   {
     "id": "prob_001290",
-    "prompt": "David has 160 cookies, Alex has 200 cookies, and David has 614 cookies. How many cookies do they have in total?",
+    "prompt": "David has 160 cookies, Alex has 200 cookies, and Victoria has 614 cookies. How many cookies do they have in total?",
     "answer": " 974",
     "ground_truth": 974,
     "split": "train",
@@ -17961,7 +17961,7 @@
   },
   {
     "id": "prob_001796",
-    "prompt": "Liam has 98 pencils, Ethan has 76 pencils, and Liam has 60 pencils. How many pencils do they have in total?",
+    "prompt": "Liam has 98 pencils, Ethan has 76 pencils, and Scarlett has 60 pencils. How many pencils do they have in total?",
     "answer": " 234",
     "ground_truth": 234,
     "split": "train",
@@ -21221,7 +21221,7 @@
   },
   {
     "id": "prob_002122",
-    "prompt": "Noah has 644 cookies, Matthew has 235 cookies, and Noah has 514 cookies. How many cookies do they have in total?",
+    "prompt": "Noah has 644 cookies, Matthew has 235 cookies, and Jackson has 514 cookies. How many cookies do they have in total?",
     "answer": " 1393",
     "ground_truth": 1393,
     "split": "train",
@@ -22591,7 +22591,7 @@
   },
   {
     "id": "prob_002259",
-    "prompt": "Sophia has 15 stickers, Ella has 13 stickers, and Ella has 31 stickers. How many stickers do they have in total?",
+    "prompt": "Sophia has 15 stickers, Ella has 13 stickers, and Liam has 31 stickers. How many stickers do they have in total?",
     "answer": " 59",
     "ground_truth": 59,
     "split": "val",
@@ -22731,7 +22731,7 @@
   },
   {
     "id": "prob_002273",
-    "prompt": "Amelia has 96 apples, Lucas has 54 apples, and Lucas has 93 apples. How many apples do they have in total?",
+    "prompt": "Amelia has 96 apples, Lucas has 54 apples, and Ella has 93 apples. How many apples do they have in total?",
     "answer": " 243",
     "ground_truth": 243,
     "split": "train",
@@ -23171,7 +23171,7 @@
   },
   {
     "id": "prob_002317",
-    "prompt": "Jackson has 14 oranges, Sofia has 10 oranges, and Sofia has 62 oranges. How many oranges do they have in total?",
+    "prompt": "Jackson has 14 oranges, Sofia has 10 oranges, and Noah has 62 oranges. How many oranges do they have in total?",
     "answer": " 86",
     "ground_truth": 86,
     "split": "train",
@@ -23451,7 +23451,7 @@
   },
   {
     "id": "prob_002345",
-    "prompt": "Olivia has 769 pencils, Emily has 735 pencils, and Emily has 773 pencils. How many pencils do they have in total?",
+    "prompt": "Olivia has 769 pencils, Emily has 735 pencils, and Logan has 773 pencils. How many pencils do they have in total?",
     "answer": " 2277",
     "ground_truth": 2277,
     "split": "train",
@@ -23841,7 +23841,7 @@
   },
   {
     "id": "prob_002384",
-    "prompt": "James has 32 stamps, Mason has 10 stamps, and James has 16 stamps. How many stamps do they have in total?",
+    "prompt": "James has 32 stamps, Mason has 10 stamps, and Benjamin has 16 stamps. How many stamps do they have in total?",
     "answer": " 58",
     "ground_truth": 58,
     "split": "train",
@@ -25951,7 +25951,7 @@
   },
   {
     "id": "prob_002595",
-    "prompt": "Lucas has 107 toy cars, Madison has 855 toy cars, and Lucas has 891 toy cars. How many toy cars do they have in total?",
+    "prompt": "Lucas has 107 toy cars, Madison has 855 toy cars, and Henry has 891 toy cars. How many toy cars do they have in total?",
     "answer": " 1853",
     "ground_truth": 1853,
     "split": "train",
@@ -26351,7 +26351,7 @@
   },
   {
     "id": "prob_002635",
-    "prompt": "Charlotte has 110 stamps, Ella has 214 stamps, and Charlotte has 412 stamps. How many stamps do they have in total?",
+    "prompt": "Charlotte has 110 stamps, Ella has 214 stamps, and Jacob has 412 stamps. How many stamps do they have in total?",
     "answer": " 736",
     "ground_truth": 736,
     "split": "train",
@@ -27141,7 +27141,7 @@
   },
   {
     "id": "prob_002714",
-    "prompt": "Matthew has 97 flowers, Madison has 15 flowers, and Matthew has 12 flowers. How many flowers do they have in total?",
+    "prompt": "Matthew has 97 flowers, Madison has 15 flowers, and Ethan has 12 flowers. How many flowers do they have in total?",
     "answer": " 124",
     "ground_truth": 124,
     "split": "train",
@@ -28351,7 +28351,7 @@
   },
   {
     "id": "prob_002835",
-    "prompt": "Lucas has 30 marbles, Charlotte has 76 marbles, and Lucas has 61 marbles. How many marbles do they have in total?",
+    "prompt": "Lucas has 30 marbles, Charlotte has 76 marbles, and Jacob has 61 marbles. How many marbles do they have in total?",
     "answer": " 167",
     "ground_truth": 167,
     "split": "test",
@@ -29141,7 +29141,7 @@
   },
   {
     "id": "prob_002914",
-    "prompt": "Alex has 450 dolls, Isabella has 543 dolls, and Alex has 728 dolls. How many dolls do they have in total?",
+    "prompt": "Alex has 450 dolls, Isabella has 543 dolls, and Evelyn has 728 dolls. How many dolls do they have in total?",
     "answer": " 1721",
     "ground_truth": 1721,
     "split": "train",
@@ -32341,7 +32341,7 @@
   },
   {
     "id": "prob_003234",
-    "prompt": "Sofia has 25 books, Samuel has 17 books, and Samuel has 39 books. How many books do they have in total?",
+    "prompt": "Sofia has 25 books, Samuel has 17 books, and David has 39 books. How many books do they have in total?",
     "answer": " 81",
     "ground_truth": 81,
     "split": "train",
@@ -33391,7 +33391,7 @@
   },
   {
     "id": "prob_003339",
-    "prompt": "Samuel has 799 cookies, Emily has 433 cookies, and Samuel has 119 cookies. How many cookies do they have in total?",
+    "prompt": "Samuel has 799 cookies, Emily has 433 cookies, and Logan has 119 cookies. How many cookies do they have in total?",
     "answer": " 1351",
     "ground_truth": 1351,
     "split": "train",
@@ -35401,7 +35401,7 @@
   },
   {
     "id": "prob_003540",
-    "prompt": "Olivia has 277 marbles, Samuel has 761 marbles, and Olivia has 346 marbles. How many marbles do they have in total?",
+    "prompt": "Olivia has 277 marbles, Samuel has 761 marbles, and Charlotte has 346 marbles. How many marbles do they have in total?",
     "answer": " 1384",
     "ground_truth": 1384,
     "split": "train",
@@ -39021,7 +39021,7 @@
   },
   {
     "id": "prob_003902",
-    "prompt": "Jacob has 937 pencils, Samuel has 905 pencils, and Jacob has 662 pencils. How many pencils do they have in total?",
+    "prompt": "Jacob has 937 pencils, Samuel has 905 pencils, and Mia has 662 pencils. How many pencils do they have in total?",
     "answer": " 2504",
     "ground_truth": 2504,
     "split": "train",
@@ -39301,7 +39301,7 @@
   },
   {
     "id": "prob_003930",
-    "prompt": "Charlotte has 68 pencils, Lily has 55 pencils, and Charlotte has 47 pencils. How many pencils do they have in total?",
+    "prompt": "Charlotte has 68 pencils, Lily has 55 pencils, and Harper has 47 pencils. How many pencils do they have in total?",
     "answer": " 170",
     "ground_truth": 170,
     "split": "train",
@@ -40601,7 +40601,7 @@
   },
   {
     "id": "prob_004060",
-    "prompt": "Lily has 59 pencils, Jackson has 45 pencils, and Jackson has 46 pencils. How many pencils do they have in total?",
+    "prompt": "Lily has 59 pencils, Jackson has 45 pencils, and Alex has 46 pencils. How many pencils do they have in total?",
     "answer": " 150",
     "ground_truth": 150,
     "split": "val",
@@ -43231,7 +43231,7 @@
   },
   {
     "id": "prob_004323",
-    "prompt": "Emma has 78 coins, Olivia has 33 coins, and Olivia has 57 coins. How many coins do they have in total?",
+    "prompt": "Emma has 78 coins, Olivia has 33 coins, and Victoria has 57 coins. How many coins do they have in total?",
     "answer": " 168",
     "ground_truth": 168,
     "split": "test",
@@ -45161,7 +45161,7 @@
   },
   {
     "id": "prob_004516",
-    "prompt": "Aiden has 85 stamps, Mia has 44 stamps, and Mia has 11 stamps. How many stamps do they have in total?",
+    "prompt": "Aiden has 85 stamps, Mia has 44 stamps, and Lucas has 11 stamps. How many stamps do they have in total?",
     "answer": " 140",
     "ground_truth": 140,
     "split": "train",
@@ -46341,7 +46341,7 @@
   },
   {
     "id": "prob_004634",
-    "prompt": "Ava has 627 toy cars, Abigail has 513 toy cars, and Ava has 579 toy cars. How many toy cars do they have in total?",
+    "prompt": "Ava has 627 toy cars, Abigail has 513 toy cars, and Jackson has 579 toy cars. How many toy cars do they have in total?",
     "answer": " 1719",
     "ground_truth": 1719,
     "split": "train",
@@ -48691,7 +48691,7 @@
   },
   {
     "id": "prob_004869",
-    "prompt": "Daniel has 29 stamps, James has 25 stamps, and Daniel has 26 stamps. How many stamps do they have in total?",
+    "prompt": "Daniel has 29 stamps, James has 25 stamps, and Olivia has 26 stamps. How many stamps do they have in total?",
     "answer": " 80",
     "ground_truth": 80,
     "split": "val",
@@ -50921,7 +50921,7 @@
   },
   {
     "id": "prob_005092",
-    "prompt": "Noah has 446 toy cars, Olivia has 414 toy cars, and Olivia has 419 toy cars. How many toy cars do they have in total?",
+    "prompt": "Noah has 446 toy cars, Olivia has 414 toy cars, and David has 419 toy cars. How many toy cars do they have in total?",
     "answer": " 1279",
     "ground_truth": 1279,
     "split": "val",
@@ -50961,7 +50961,7 @@
   },
   {
     "id": "prob_005096",
-    "prompt": "Isabella has 10 flowers, Ava has 84 flowers, and Ava has 93 flowers. How many flowers do they have in total?",
+    "prompt": "Isabella has 10 flowers, Ava has 84 flowers, and Michael has 93 flowers. How many flowers do they have in total?",
     "answer": " 187",
     "ground_truth": 187,
     "split": "val",
@@ -51741,7 +51741,7 @@
   },
   {
     "id": "prob_005174",
-    "prompt": "Michael has 100 coins, Liam has 774 coins, and Liam has 678 coins. How many coins do they have in total?",
+    "prompt": "Michael has 100 coins, Liam has 774 coins, and Mason has 678 coins. How many coins do they have in total?",
     "answer": " 1552",
     "ground_truth": 1552,
     "split": "train",
@@ -53061,7 +53061,7 @@
   },
   {
     "id": "prob_005306",
-    "prompt": "Lucas has 472 stamps, Evelyn has 100 stamps, and Evelyn has 628 stamps. How many stamps do they have in total?",
+    "prompt": "Lucas has 472 stamps, Evelyn has 100 stamps, and Aiden has 628 stamps. How many stamps do they have in total?",
     "answer": " 1200",
     "ground_truth": 1200,
     "split": "train",
@@ -54531,7 +54531,7 @@
   },
   {
     "id": "prob_005453",
-    "prompt": "Henry has 24 stickers, Lily has 49 stickers, and Henry has 53 stickers. How many stickers do they have in total?",
+    "prompt": "Henry has 24 stickers, Lily has 49 stickers, and Noah has 53 stickers. How many stickers do they have in total?",
     "answer": " 126",
     "ground_truth": 126,
     "split": "train",
@@ -54821,7 +54821,7 @@
   },
   {
     "id": "prob_005482",
-    "prompt": "Evelyn has 21 oranges, Liam has 16 oranges, and Evelyn has 48 oranges. How many oranges do they have in total?",
+    "prompt": "Evelyn has 21 oranges, Liam has 16 oranges, and Jackson has 48 oranges. How many oranges do they have in total?",
     "answer": " 85",
     "ground_truth": 85,
     "split": "train",
@@ -56241,7 +56241,7 @@
   },
   {
     "id": "prob_005624",
-    "prompt": "Ethan has 43 oranges, Sophia has 68 oranges, and Sophia has 90 oranges. How many oranges do they have in total?",
+    "prompt": "Ethan has 43 oranges, Sophia has 68 oranges, and Victoria has 90 oranges. How many oranges do they have in total?",
     "answer": " 201",
     "ground_truth": 201,
     "split": "train",
@@ -57101,7 +57101,7 @@
   },
   {
     "id": "prob_005710",
-    "prompt": "Mia has 628 marbles, Abigail has 212 marbles, and Abigail has 562 marbles. How many marbles do they have in total?",
+    "prompt": "Mia has 628 marbles, Abigail has 212 marbles, and Scarlett has 562 marbles. How many marbles do they have in total?",
     "answer": " 1402",
     "ground_truth": 1402,
     "split": "train",
@@ -57871,7 +57871,7 @@
   },
   {
     "id": "prob_005787",
-    "prompt": "Mason has 495 stamps, Madison has 532 stamps, and Mason has 969 stamps. How many stamps do they have in total?",
+    "prompt": "Mason has 495 stamps, Madison has 532 stamps, and Amelia has 969 stamps. How many stamps do they have in total?",
     "answer": " 1996",
     "ground_truth": 1996,
     "split": "train",
@@ -60231,7 +60231,7 @@
   },
   {
     "id": "prob_006023",
-    "prompt": "Ava has 174 cookies, James has 200 cookies, and James has 422 cookies. How many cookies do they have in total?",
+    "prompt": "Ava has 174 cookies, James has 200 cookies, and Alex has 422 cookies. How many cookies do they have in total?",
     "answer": " 796",
     "ground_truth": 796,
     "split": "train",
@@ -60701,7 +60701,7 @@
   },
   {
     "id": "prob_006070",
-    "prompt": "Ella has 53 pencils, Logan has 66 pencils, and Logan has 50 pencils. How many pencils do they have in total?",
+    "prompt": "Ella has 53 pencils, Logan has 66 pencils, and Amelia has 50 pencils. How many pencils do they have in total?",
     "answer": " 169",
     "ground_truth": 169,
     "split": "train",
@@ -62801,7 +62801,7 @@
   },
   {
     "id": "prob_006280",
-    "prompt": "Madison has 56 oranges, Scarlett has 97 oranges, and Scarlett has 75 oranges. How many oranges do they have in total?",
+    "prompt": "Madison has 56 oranges, Scarlett has 97 oranges, and Lily has 75 oranges. How many oranges do they have in total?",
     "answer": " 228",
     "ground_truth": 228,
     "split": "train",
@@ -63451,7 +63451,7 @@
   },
   {
     "id": "prob_006345",
-    "prompt": "Ethan has 49 chocolates, Abigail has 30 chocolates, and Abigail has 68 chocolates. How many chocolates do they have in total?",
+    "prompt": "Ethan has 49 chocolates, Abigail has 30 chocolates, and Charlotte has 68 chocolates. How many chocolates do they have in total?",
     "answer": " 147",
     "ground_truth": 147,
     "split": "train",
@@ -64571,7 +64571,7 @@
   },
   {
     "id": "prob_006457",
-    "prompt": "Benjamin has 497 pencils, Abigail has 286 pencils, and Benjamin has 162 pencils. How many pencils do they have in total?",
+    "prompt": "Benjamin has 497 pencils, Abigail has 286 pencils, and Emily has 162 pencils. How many pencils do they have in total?",
     "answer": " 945",
     "ground_truth": 945,
     "split": "train",
@@ -64721,7 +64721,7 @@
   },
   {
     "id": "prob_006472",
-    "prompt": "Ava has 647 stamps, Benjamin has 465 stamps, and Benjamin has 516 stamps. How many stamps do they have in total?",
+    "prompt": "Ava has 647 stamps, Benjamin has 465 stamps, and Madison has 516 stamps. How many stamps do they have in total?",
     "answer": " 1628",
     "ground_truth": 1628,
     "split": "train",
@@ -64851,7 +64851,7 @@
   },
   {
     "id": "prob_006485",
-    "prompt": "Jacob has 250 apples, David has 124 apples, and Jacob has 494 apples. How many apples do they have in total?",
+    "prompt": "Jacob has 250 apples, David has 124 apples, and Amelia has 494 apples. How many apples do they have in total?",
     "answer": " 868",
     "ground_truth": 868,
     "split": "test",
@@ -65681,7 +65681,7 @@
   },
   {
     "id": "prob_006568",
-    "prompt": "Noah has 694 balloons, Aiden has 900 balloons, and Aiden has 762 balloons. How many balloons do they have in total?",
+    "prompt": "Noah has 694 balloons, Aiden has 900 balloons, and Ava has 762 balloons. How many balloons do they have in total?",
     "answer": " 2356",
     "ground_truth": 2356,
     "split": "val",
@@ -67131,7 +67131,7 @@
   },
   {
     "id": "prob_006713",
-    "prompt": "Emma has 11 oranges, Daniel has 73 oranges, and Daniel has 47 oranges. How many oranges do they have in total?",
+    "prompt": "Emma has 11 oranges, Daniel has 73 oranges, and Aiden has 47 oranges. How many oranges do they have in total?",
     "answer": " 131",
     "ground_truth": 131,
     "split": "train",
@@ -68741,7 +68741,7 @@
   },
   {
     "id": "prob_006874",
-    "prompt": "Ava has 13 stamps, Matthew has 30 stamps, and Matthew has 75 stamps. How many stamps do they have in total?",
+    "prompt": "Ava has 13 stamps, Matthew has 30 stamps, and Ethan has 75 stamps. How many stamps do they have in total?",
     "answer": " 118",
     "ground_truth": 118,
     "split": "train",
@@ -72121,7 +72121,7 @@
   },
   {
     "id": "prob_007212",
-    "prompt": "David has 369 cookies, Sofia has 478 cookies, and David has 890 cookies. How many cookies do they have in total?",
+    "prompt": "David has 369 cookies, Sofia has 478 cookies, and James has 890 cookies. How many cookies do they have in total?",
     "answer": " 1737",
     "ground_truth": 1737,
     "split": "val",
@@ -73341,7 +73341,7 @@
   },
   {
     "id": "prob_007334",
-    "prompt": "Charlotte has 169 flowers, Samuel has 436 flowers, and Samuel has 817 flowers. How many flowers do they have in total?",
+    "prompt": "Charlotte has 169 flowers, Samuel has 436 flowers, and Matthew has 817 flowers. How many flowers do they have in total?",
     "answer": " 1422",
     "ground_truth": 1422,
     "split": "train",
@@ -74361,7 +74361,7 @@
   },
   {
     "id": "prob_007436",
-    "prompt": "Jacob has 20 oranges, Daniel has 22 oranges, and Jacob has 34 oranges. How many oranges do they have in total?",
+    "prompt": "Jacob has 20 oranges, Daniel has 22 oranges, and Harper has 34 oranges. How many oranges do they have in total?",
     "answer": " 76",
     "ground_truth": 76,
     "split": "test",
@@ -74901,7 +74901,7 @@
   },
   {
     "id": "prob_007490",
-    "prompt": "Emily has 22 flowers, Ella has 68 flowers, and Ella has 79 flowers. How many flowers do they have in total?",
+    "prompt": "Emily has 22 flowers, Ella has 68 flowers, and Henry has 79 flowers. How many flowers do they have in total?",
     "answer": " 169",
     "ground_truth": 169,
     "split": "train",
@@ -75601,7 +75601,7 @@
   },
   {
     "id": "prob_007560",
-    "prompt": "Sophia has 33 dolls, Ella has 81 dolls, and Sophia has 98 dolls. How many dolls do they have in total?",
+    "prompt": "Sophia has 33 dolls, Ella has 81 dolls, and Victoria has 98 dolls. How many dolls do they have in total?",
     "answer": " 212",
     "ground_truth": 212,
     "split": "train",
@@ -76301,7 +76301,7 @@
   },
   {
     "id": "prob_007630",
-    "prompt": "Michael has 967 stamps, Noah has 342 stamps, and Michael has 483 stamps. How many stamps do they have in total?",
+    "prompt": "Michael has 967 stamps, Noah has 342 stamps, and James has 483 stamps. How many stamps do they have in total?",
     "answer": " 1792",
     "ground_truth": 1792,
     "split": "test",
@@ -77121,7 +77121,7 @@
   },
   {
     "id": "prob_007712",
-    "prompt": "Ethan has 46 chocolates, Noah has 20 chocolates, and Ethan has 43 chocolates. How many chocolates do they have in total?",
+    "prompt": "Ethan has 46 chocolates, Noah has 20 chocolates, and Daniel has 43 chocolates. How many chocolates do they have in total?",
     "answer": " 109",
     "ground_truth": 109,
     "split": "train",
@@ -79771,7 +79771,7 @@
   },
   {
     "id": "prob_007977",
-    "prompt": "Emma has 218 dolls, Scarlett has 187 dolls, and Emma has 241 dolls. How many dolls do they have in total?",
+    "prompt": "Emma has 218 dolls, Scarlett has 187 dolls, and Madison has 241 dolls. How many dolls do they have in total?",
     "answer": " 646",
     "ground_truth": 646,
     "split": "train",
@@ -84971,7 +84971,7 @@
   },
   {
     "id": "prob_008497",
-    "prompt": "Liam has 211 cards, Amelia has 231 cards, and Amelia has 526 cards. How many cards do they have in total?",
+    "prompt": "Liam has 211 cards, Amelia has 231 cards, and Michael has 526 cards. How many cards do they have in total?",
     "answer": " 968",
     "ground_truth": 968,
     "split": "train",
@@ -85931,7 +85931,7 @@
   },
   {
     "id": "prob_008593",
-    "prompt": "Emma has 19 toy cars, Michael has 43 toy cars, and Michael has 54 toy cars. How many toy cars do they have in total?",
+    "prompt": "Emma has 19 toy cars, Michael has 43 toy cars, and Sofia has 54 toy cars. How many toy cars do they have in total?",
     "answer": " 116",
     "ground_truth": 116,
     "split": "train",
@@ -87671,7 +87671,7 @@
   },
   {
     "id": "prob_008767",
-    "prompt": "Victoria has 22 cookies, Henry has 31 cookies, and Victoria has 25 cookies. How many cookies do they have in total?",
+    "prompt": "Victoria has 22 cookies, Henry has 31 cookies, and Noah has 25 cookies. How many cookies do they have in total?",
     "answer": " 78",
     "ground_truth": 78,
     "split": "train",
@@ -89031,7 +89031,7 @@
   },
   {
     "id": "prob_008903",
-    "prompt": "Scarlett has 37 cookies, Ava has 40 cookies, and Ava has 54 cookies. How many cookies do they have in total?",
+    "prompt": "Scarlett has 37 cookies, Ava has 40 cookies, and Isabella has 54 cookies. How many cookies do they have in total?",
     "answer": " 131",
     "ground_truth": 131,
     "split": "train",
@@ -89191,7 +89191,7 @@
   },
   {
     "id": "prob_008919",
-    "prompt": "Isabella has 469 cookies, Olivia has 411 cookies, and Isabella has 553 cookies. How many cookies do they have in total?",
+    "prompt": "Isabella has 469 cookies, Olivia has 411 cookies, and Liam has 553 cookies. How many cookies do they have in total?",
     "answer": " 1433",
     "ground_truth": 1433,
     "split": "train",
@@ -89621,7 +89621,7 @@
   },
   {
     "id": "prob_008962",
-    "prompt": "Henry has 75 books, David has 14 books, and Henry has 59 books. How many books do they have in total?",
+    "prompt": "Henry has 75 books, David has 14 books, and Scarlett has 59 books. How many books do they have in total?",
     "answer": " 148",
     "ground_truth": 148,
     "split": "train",
@@ -90291,7 +90291,7 @@
   },
   {
     "id": "prob_009029",
-    "prompt": "James has 69 dolls, Amelia has 82 dolls, and James has 99 dolls. How many dolls do they have in total?",
+    "prompt": "James has 69 dolls, Amelia has 82 dolls, and Michael has 99 dolls. How many dolls do they have in total?",
     "answer": " 250",
     "ground_truth": 250,
     "split": "test",
@@ -91071,7 +91071,7 @@
   },
   {
     "id": "prob_009107",
-    "prompt": "Amelia has 88 chocolates, Noah has 85 chocolates, and Noah has 56 chocolates. How many chocolates do they have in total?",
+    "prompt": "Amelia has 88 chocolates, Noah has 85 chocolates, and Ethan has 56 chocolates. How many chocolates do they have in total?",
     "answer": " 229",
     "ground_truth": 229,
     "split": "train",
@@ -91561,7 +91561,7 @@
   },
   {
     "id": "prob_009156",
-    "prompt": "Jacob has 614 flowers, Alex has 768 flowers, and Alex has 112 flowers. How many flowers do they have in total?",
+    "prompt": "Jacob has 614 flowers, Alex has 768 flowers, and Ava has 112 flowers. How many flowers do they have in total?",
     "answer": " 1494",
     "ground_truth": 1494,
     "split": "train",
@@ -92391,7 +92391,7 @@
   },
   {
     "id": "prob_009239",
-    "prompt": "Scarlett has 133 apples, Ethan has 792 apples, and Scarlett has 275 apples. How many apples do they have in total?",
+    "prompt": "Scarlett has 133 apples, Ethan has 792 apples, and Emily has 275 apples. How many apples do they have in total?",
     "answer": " 1200",
     "ground_truth": 1200,
     "split": "train",
@@ -95821,7 +95821,7 @@
   },
   {
     "id": "prob_009582",
-    "prompt": "Madison has 17 pencils, Samuel has 86 pencils, and Madison has 27 pencils. How many pencils do they have in total?",
+    "prompt": "Madison has 17 pencils, Samuel has 86 pencils, and Henry has 27 pencils. How many pencils do they have in total?",
     "answer": " 130",
     "ground_truth": 130,
     "split": "test",
@@ -97831,7 +97831,7 @@
   },
   {
     "id": "prob_009783",
-    "prompt": "Jacob has 575 dolls, Henry has 839 dolls, and Jacob has 751 dolls. How many dolls do they have in total?",
+    "prompt": "Jacob has 575 dolls, Henry has 839 dolls, and Ethan has 751 dolls. How many dolls do they have in total?",
     "answer": " 2165",
     "ground_truth": 2165,
     "split": "train",
