@@ -13,6 +13,7 @@ Output: 5 JSON files (one per format) with matched IDs and train/val/test splits
 import argparse
 import json
 import random
+import hashlib
 from typing import List, Dict, Tuple, Optional
 from collections import defaultdict
 from num2words import num2words
@@ -438,9 +439,11 @@ class DatasetFormatter:
         operators = problem['operators']
         result = problem['result']
         
-        # Select random characters and object (use problem ID as seed for consistency)
-        problem_seed = hash(str(operands) + str(operators)) % (2**32)
-        temp_rng = random.Random(problem_seed)
+        # Select random characters and object using a stable, deterministic seed
+        # Seed is derived from problem id (if available), operands and operators
+        seed_source = f"{problem.get('id', '')}|{operands}|{operators}"
+        seed_int = int.from_bytes(hashlib.sha256(seed_source.encode('utf-8')).digest()[:8], 'big')
+        temp_rng = random.Random(seed_int)
         
         char1 = temp_rng.choice(characters)
         char2 = temp_rng.choice(characters)
