@@ -128,7 +128,7 @@ mkdir -p "$HF_OFFLOAD_DIR"
 # PROJECT SETUP
 # ============================================
 # MODIFY THIS PATH TO YOUR PROJECT DIRECTORY
-PROJECT_DIR=/orcd/data/evelina9/001/USERS/devar_ag/arith-data
+PROJECT_DIR=/orcd/data/evelina9/001/USERS/devar_ag/arithmetic-dataset
 
 cd "$PROJECT_DIR"
 
