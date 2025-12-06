@@ -131,14 +131,15 @@ def check_answer(predicted: str, expected: str, dataset_type: str) -> bool:
 
 
 def evaluate_standard(model, tokenizer, dataset: list, dataset_type: str,
-                      max_new_tokens: int = 50) -> dict:
+                      max_new_tokens: int = 8,
+                      log_every: int = 100) -> dict:
     """Evaluate standard (non-reasoning) LLM"""
     results = []
     correct = 0
     
     suffix = PROMPT_SUFFIXES.get(dataset_type, '')
     
-    for item in tqdm(dataset, desc=f"Evaluating {dataset_type}"):
+    for idx, item in enumerate(tqdm(dataset, desc=f"Evaluating {dataset_type}")):
         prompt = item['prompt'] + suffix
         expected = item['answer']
         
@@ -175,6 +176,12 @@ def evaluate_standard(model, tokenizer, dataset: list, dataset_type: str,
             'predicted': predicted,
             'correct': is_correct,
         })
+
+        # Periodic logging
+        if (idx + 1) % log_every == 0:
+            seen = idx + 1
+            acc_so_far = correct / seen if seen else 0.0
+            print(f"[progress] {dataset_type}: {seen}/{len(dataset)} processed, acc={acc_so_far*100:.2f}%")
     
     accuracy = correct / len(dataset) if dataset else 0
     
@@ -232,7 +239,8 @@ def build_system_prompt(dataset_type: str) -> str:
 
 
 def evaluate_reasoning(model, tokenizer, dataset: list, dataset_type: str,
-                       max_new_tokens: int = 1024) -> dict:
+                       max_new_tokens: int = 1024,
+                       log_every: int = 100) -> dict:
     """Evaluate reasoning LLM with chat template"""
     results = []
     correct = 0
@@ -240,7 +248,7 @@ def evaluate_reasoning(model, tokenizer, dataset: list, dataset_type: str,
     # System prompt for reasoning models, adapted per dataset type
     system_prompt = build_system_prompt(dataset_type)
     
-    for item in tqdm(dataset, desc=f"Evaluating {dataset_type} (reasoning)"):
+    for idx, item in enumerate(tqdm(dataset, desc=f"Evaluating {dataset_type} (reasoning)")):
         prompt = item['prompt']
         expected = item['answer']
         
@@ -257,7 +265,10 @@ def evaluate_reasoning(model, tokenizer, dataset: list, dataset_type: str,
                 return_tensors="pt", 
                 add_generation_prompt=True
             )
-            inputs = {"input_ids": chat_input.to(model.device)}
+            inputs = {
+                "input_ids": chat_input.to(model.device),
+                "attention_mask": torch.ones_like(chat_input).to(model.device),
+            }
             input_len = chat_input.shape[1]
         except Exception:
             # Fallback if chat template not available
@@ -272,6 +283,9 @@ def evaluate_reasoning(model, tokenizer, dataset: list, dataset_type: str,
                 **inputs,
                 max_new_tokens=max_new_tokens,
                 do_sample=False,
+                temperature=None,
+                top_p=None,
+                top_k=None,
                 pad_token_id=tokenizer.eos_token_id,
                 eos_token_id=tokenizer.eos_token_id,
             )
@@ -294,6 +308,12 @@ def evaluate_reasoning(model, tokenizer, dataset: list, dataset_type: str,
             'predicted': predicted,       # Extracted answer only
             'correct': is_correct,
         })
+
+        # Periodic logging
+        if (idx + 1) % log_every == 0:
+            seen = idx + 1
+            acc_so_far = correct / seen if seen else 0.0
+            print(f"[progress] {dataset_type}: {seen}/{len(dataset)} processed, acc={acc_so_far*100:.2f}%")
     
     accuracy = correct / len(dataset) if dataset else 0
     
@@ -356,8 +376,12 @@ def main():
                         help='Dataset split to evaluate')
     parser.add_argument('--max-samples', type=int, default=None,
                         help='Maximum samples to evaluate (for quick testing)')
-    parser.add_argument('--max-new-tokens', type=int, default=50,
-                        help='Max new tokens for standard mode (reasoning uses 1024)')
+    parser.add_argument('--max-new-tokens', type=int, default=8,
+                        help='Max new tokens for standard mode')
+    parser.add_argument('--max-new-tokens-reasoning', type=int, default=1024,
+                        help='Max new tokens for reasoning mode')
+    parser.add_argument('--log-every', type=int, default=100,
+                        help='Log interim accuracy every N samples')
     parser.add_argument('--output-dir', type=str, default='results',
                         help='Output directory for results')
     parser.add_argument('--dtype', type=str, default='auto',
@@ -432,13 +456,18 @@ def main():
         # Evaluate
         if args.reasoning:
             results = evaluate_reasoning(
-                model, tokenizer, dataset, dataset_type,
-                max_new_tokens=1024
+                model,
+                tokenizer,
+                dataset,
+                dataset_type,
+                max_new_tokens=args.max_new_tokens_reasoning,
+                log_every=args.log_every,
             )
         else:
             results = evaluate_standard(
                 model, tokenizer, dataset, dataset_type,
-                max_new_tokens=args.max_new_tokens
+                max_new_tokens=args.max_new_tokens,
+                log_every=args.log_every,
             )
         
         # Save results
