@@ -30,12 +30,14 @@ pip install -r requirements.txt
 python generate_arithmetic_data.py -n 10000
 ```
 
-This creates 5 files with matched IDs (so the problems are aligned):
-- `arith_dataset_numeric.json`
-- `arith_dataset_english.json`
-- `arith_dataset_spanish.json`
-- `arith_dataset_italian.json`
-- `arith_dataset_embedded.json`
+This creates 5 files in `data/json/` with matched IDs:
+- `data/json/arith_dataset_numeric.json`
+- `data/json/arith_dataset_english.json`
+- `data/json/arith_dataset_spanish.json`
+- `data/json/arith_dataset_italian.json`
+- `data/json/arith_dataset_embedded.json`
+
+For HELM format, files are saved in `data/HELM/`.
 
 ## Usage examples
 
@@ -144,7 +146,7 @@ Each line is a JSON object (Stanford HELM benchmark compatible):
 ```python
 import json
 
-with open('arith_dataset_numeric.json', 'r') as f:
+with open('data/json/arith_dataset_numeric.json', 'r') as f:
     data = json.load(f)
 
 for problem in data:
@@ -156,7 +158,7 @@ for problem in data:
 import json
 
 problems = []
-with open('arith_dataset_numeric.jsonl', 'r') as f:
+with open('data/HELM/arith_dataset_HELM_numeric.jsonl', 'r') as f:
     for line in f:
         problems.append(json.loads(line))
 
@@ -183,6 +185,72 @@ The embedded format generates contextual word problems:
 - **Multi-term**: "Sophia had 50 stickers. Emma gave Sophia 30 more stickers. Then Sophia gave 25 stickers away. How many stickers does Sophia have now?"
 
 Features 36 character names and 15 object types with deterministic story generation (same problem = same story).
+
+## Evaluating LLMs
+
+Two evaluation modes are supported for different types of LLMs:
+
+### Standard LLMs (base models)
+
+For base/completion models, the script appends a suffix to guide generation and checks if the continuation matches the expected answer.
+
+```bash
+# Local evaluation
+python eval_models.py --model mistralai/Mistral-7B-v0.1 --dataset all
+
+# Quick test with 100 samples
+python eval_models.py --model meta-llama/Llama-2-7b-hf --max-samples 100
+```
+
+### Reasoning LLMs
+
+For reasoning models (e.g., Magistral), the script uses chat templates and instructs the model to output `ANSWER: <value>` after reasoning. Only the extracted answer is scored (reasoning tokens are discarded).
+
+```bash
+python eval_models.py --model mistralai/Magistral-Small-2509 --reasoning
+```
+
+### SLURM cluster usage
+
+```bash
+# Standard model
+sbatch eval_models.sh --modelname mistralai/Mistral-7B-v0.1
+
+# Reasoning model
+sbatch eval_models.sh --modelname mistralai/Magistral-Small-2509 --reasoning
+
+# Specific dataset only
+sbatch eval_models.sh --modelname meta-llama/Llama-2-7b-hf --dataset numeric
+
+# Quick test
+sbatch eval_models.sh --modelname meta-llama/Llama-2-7b-hf --max-samples 100
+```
+
+### Results structure
+
+Results are saved in `results/<model_name>/<mode>/`:
+
+```
+results/
+├── mistralai__Mistral-7B-v0.1/
+│   └── standard/
+│       ├── numeric_results.json      # Detailed per-problem results
+│       ├── numeric_summary.json      # Accuracy summary
+│       ├── english_results.json
+│       ├── ...
+│       └── overall_summary.json      # Combined summary
+└── mistralai__Magistral-Small-2509/
+    └── reasoning/
+        └── ...
+```
+
+Each `*_results.json` contains:
+- `id`: Problem ID
+- `prompt`: Original prompt
+- `expected`: Expected answer
+- `generated`: Raw model output (or `reasoning` for reasoning models)
+- `predicted`: Extracted answer
+- `correct`: Boolean
 
 ## Notes
 

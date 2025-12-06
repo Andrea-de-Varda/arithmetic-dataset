@@ -28,3 +28,10 @@ example_*.json
 example_*.jsonl
 demo_*.json
 demo_*.jsonl
+
+# Evaluation results
+results/
+
+# SLURM output files
+*.out
+slurm-*.out
