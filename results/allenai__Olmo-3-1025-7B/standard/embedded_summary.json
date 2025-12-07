@@ -1,0 +1,9 @@
+{
+  "model": "allenai/Olmo-3-1025-7B",
+  "dataset": "embedded",
+  "mode": "standard",
+  "accuracy": 0.7318768619662364,
+  "correct": 737,
+  "total": 1007,
+  "timestamp": "2025-12-06T18:12:20.041079"
+}

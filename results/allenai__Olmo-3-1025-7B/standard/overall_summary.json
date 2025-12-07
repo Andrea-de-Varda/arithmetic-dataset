@@ -1,0 +1,39 @@
+{
+  "model": "allenai/Olmo-3-1025-7B",
+  "mode": "standard",
+  "split": "test",
+  "timestamp": "2025-12-06T18:12:20.041546",
+  "results": [
+    {
+      "dataset": "numeric",
+      "accuracy": 0.9205561072492552,
+      "correct": 927,
+      "total": 1007
+    },
+    {
+      "dataset": "english",
+      "accuracy": 0.4240317775571003,
+      "correct": 427,
+      "total": 1007
+    },
+    {
+      "dataset": "spanish",
+      "accuracy": 0.05362462760675273,
+      "correct": 54,
+      "total": 1007
+    },
+    {
+      "dataset": "italian",
+      "accuracy": 0.004965243296921549,
+      "correct": 5,
+      "total": 1007
+    },
+    {
+      "dataset": "embedded",
+      "accuracy": 0.7318768619662364,
+      "correct": 737,
+      "total": 1007
+    }
+  ],
+  "average_accuracy": 0.42701092353525316
+}

@@ -1,0 +1,39 @@
+{
+  "model": "mistralai/Mistral-7B-v0.1",
+  "mode": "standard",
+  "split": "test",
+  "timestamp": "2025-12-06T18:55:03.445005",
+  "results": [
+    {
+      "dataset": "numeric",
+      "accuracy": 0.5898709036742801,
+      "correct": 594,
+      "total": 1007
+    },
+    {
+      "dataset": "english",
+      "accuracy": 0.3435948361469712,
+      "correct": 346,
+      "total": 1007
+    },
+    {
+      "dataset": "spanish",
+      "accuracy": 0.13306852035749753,
+      "correct": 134,
+      "total": 1007
+    },
+    {
+      "dataset": "italian",
+      "accuracy": 0.0605759682224429,
+      "correct": 61,
+      "total": 1007
+    },
+    {
+      "dataset": "embedded",
+      "accuracy": 0.5719960278053625,
+      "correct": 576,
+      "total": 1007
+    }
+  ],
+  "average_accuracy": 0.33982125124131085
+}

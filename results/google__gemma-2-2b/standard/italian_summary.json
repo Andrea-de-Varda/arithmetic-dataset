@@ -1,0 +1,9 @@
+{
+  "model": "google/gemma-2-2b",
+  "dataset": "italian",
+  "mode": "standard",
+  "accuracy": 0.023833167825223437,
+  "correct": 24,
+  "total": 1007,
+  "timestamp": "2025-12-06T19:27:05.119511"
+}

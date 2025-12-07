@@ -1,0 +1,39 @@
+{
+  "model": "google/gemma-2-9b",
+  "mode": "standard",
+  "split": "test",
+  "timestamp": "2025-12-06T19:04:28.389893",
+  "results": [
+    {
+      "dataset": "numeric",
+      "accuracy": 0.874875868917577,
+      "correct": 881,
+      "total": 1007
+    },
+    {
+      "dataset": "english",
+      "accuracy": 0.5928500496524329,
+      "correct": 597,
+      "total": 1007
+    },
+    {
+      "dataset": "spanish",
+      "accuracy": 0.48063555114200596,
+      "correct": 484,
+      "total": 1007
+    },
+    {
+      "dataset": "italian",
+      "accuracy": 0.18470705064548162,
+      "correct": 186,
+      "total": 1007
+    },
+    {
+      "dataset": "embedded",
+      "accuracy": 0.8490566037735849,
+      "correct": 855,
+      "total": 1007
+    }
+  ],
+  "average_accuracy": 0.5964250248262165
+}

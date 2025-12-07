@@ -1,0 +1,9 @@
+{
+  "model": "Qwen/Qwen3-30B-A3B-Base",
+  "dataset": "embedded",
+  "mode": "standard",
+  "accuracy": 0.968222442899702,
+  "correct": 975,
+  "total": 1007,
+  "timestamp": "2025-12-06T20:14:17.768352"
+}

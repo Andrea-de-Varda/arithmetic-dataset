@@ -1,0 +1,9 @@
+{
+  "model": "meta-llama/Llama-3.2-3B",
+  "dataset": "spanish",
+  "mode": "standard",
+  "accuracy": 0.04865938430983118,
+  "correct": 49,
+  "total": 1007,
+  "timestamp": "2025-12-06T17:25:14.499870"
+}

@@ -1,0 +1,9 @@
+{
+  "model": "allenai/Olmo-3-1125-32B",
+  "dataset": "spanish",
+  "mode": "standard",
+  "accuracy": 0.2939424031777557,
+  "correct": 296,
+  "total": 1007,
+  "timestamp": "2025-12-06T18:22:28.512637"
+}

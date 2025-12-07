@@ -1,0 +1,39 @@
+{
+  "model": "meta-llama/Llama-3.2-1B",
+  "mode": "standard",
+  "split": "test",
+  "timestamp": "2025-12-06T17:24:46.155828",
+  "results": [
+    {
+      "dataset": "numeric",
+      "accuracy": 0.47368421052631576,
+      "correct": 477,
+      "total": 1007
+    },
+    {
+      "dataset": "english",
+      "accuracy": 0.01787487586891758,
+      "correct": 18,
+      "total": 1007
+    },
+    {
+      "dataset": "spanish",
+      "accuracy": 0.00893743793445879,
+      "correct": 9,
+      "total": 1007
+    },
+    {
+      "dataset": "italian",
+      "accuracy": 0.005958291956305859,
+      "correct": 6,
+      "total": 1007
+    },
+    {
+      "dataset": "embedded",
+      "accuracy": 0.31082423038728896,
+      "correct": 313,
+      "total": 1007
+    }
+  ],
+  "average_accuracy": 0.16345580933465736
+}

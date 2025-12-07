@@ -1,0 +1,9 @@
+{
+  "model": "mistralai/Mistral-7B-v0.1",
+  "dataset": "embedded",
+  "mode": "standard",
+  "accuracy": 0.5719960278053625,
+  "correct": 576,
+  "total": 1007,
+  "timestamp": "2025-12-06T18:55:03.444619"
+}

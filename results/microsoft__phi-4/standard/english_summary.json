@@ -1,0 +1,9 @@
+{
+  "model": "microsoft/phi-4",
+  "dataset": "english",
+  "mode": "standard",
+  "accuracy": 0.5173783515392254,
+  "correct": 521,
+  "total": 1007,
+  "timestamp": "2025-12-06T19:21:37.847107"
+}

@@ -1,0 +1,9 @@
+{
+  "model": "Qwen/Qwen3-32B",
+  "dataset": "italian",
+  "mode": "standard",
+  "accuracy": 0.4240317775571003,
+  "correct": 427,
+  "total": 1007,
+  "timestamp": "2025-12-06T18:29:52.893349"
+}

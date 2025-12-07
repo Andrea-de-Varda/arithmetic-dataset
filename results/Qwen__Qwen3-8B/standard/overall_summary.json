@@ -1,0 +1,39 @@
+{
+  "model": "Qwen/Qwen3-8B",
+  "mode": "standard",
+  "split": "test",
+  "timestamp": "2025-12-06T17:40:55.533652",
+  "results": [
+    {
+      "dataset": "numeric",
+      "accuracy": 0.8540218470705064,
+      "correct": 860,
+      "total": 1007
+    },
+    {
+      "dataset": "english",
+      "accuracy": 0.35054617676266137,
+      "correct": 353,
+      "total": 1007
+    },
+    {
+      "dataset": "spanish",
+      "accuracy": 0.37735849056603776,
+      "correct": 380,
+      "total": 1007
+    },
+    {
+      "dataset": "italian",
+      "accuracy": 0.13406156901688182,
+      "correct": 135,
+      "total": 1007
+    },
+    {
+      "dataset": "embedded",
+      "accuracy": 0.8440913604766633,
+      "correct": 850,
+      "total": 1007
+    }
+  ],
+  "average_accuracy": 0.5120158887785502
+}

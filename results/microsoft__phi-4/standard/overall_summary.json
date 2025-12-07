@@ -1,0 +1,39 @@
+{
+  "model": "microsoft/phi-4",
+  "mode": "standard",
+  "split": "test",
+  "timestamp": "2025-12-06T19:33:27.091116",
+  "results": [
+    {
+      "dataset": "numeric",
+      "accuracy": 0.9851042701092354,
+      "correct": 992,
+      "total": 1007
+    },
+    {
+      "dataset": "english",
+      "accuracy": 0.5173783515392254,
+      "correct": 521,
+      "total": 1007
+    },
+    {
+      "dataset": "spanish",
+      "accuracy": 0.5104270109235353,
+      "correct": 514,
+      "total": 1007
+    },
+    {
+      "dataset": "italian",
+      "accuracy": 0.3356504468718967,
+      "correct": 338,
+      "total": 1007
+    },
+    {
+      "dataset": "embedded",
+      "accuracy": 0.9920556107249255,
+      "correct": 999,
+      "total": 1007
+    }
+  ],
+  "average_accuracy": 0.6681231380337637
+}
