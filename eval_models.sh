@@ -3,7 +3,7 @@
 #SBATCH --gres=gpu:a100:1
 #SBATCH --mem=40G
 #SBATCH -c 4
-#SBATCH -t 24:00:00
+#SBATCH -t 48:00:00
 #SBATCH --output=eval_arith_%j.out
 
 set -euo pipefail
@@ -17,6 +17,7 @@ DATASET="all"
 SPLIT="test"
 MAX_SAMPLES=""
 DTYPE="auto"
+ONE_SHOT=""
 
 usage() {
     echo "Usage: sbatch eval_models.sh --modelname <model> [options]"
@@ -30,6 +31,7 @@ usage() {
     echo "  --split NAME        Split to evaluate: train|val|test (default: test)"
     echo "  --max-samples N     Limit evaluation to N samples (for testing)"
     echo "  --dtype TYPE        Model dtype: auto|float16|bfloat16|float32 (default: auto)"
+    echo "  --one-shot          Prepend a one-shot exemplar to standard prompts"
     echo ""
     echo "Examples:"
     echo "  sbatch eval_models.sh --modelname mistralai/Mistral-7B-v0.1"
@@ -64,6 +66,10 @@ while [[ $# -gt 0 ]]; do
             DTYPE="$2"
             shift 2
             ;;
+        --one-shot)
+            ONE_SHOT="--one-shot"
+            shift
+            ;;
         -h|--help)
             usage
             ;;
@@ -90,6 +96,9 @@ echo "Mode:      ${REASONING:-standard}"
 echo "Dataset:   $DATASET"
 echo "Split:     $SPLIT"
 echo "Dtype:     $DTYPE"
+if [ -n "$ONE_SHOT" ] && [ -z "$REASONING" ]; then
+    echo "Prompting: one-shot exemplar prepended"
+fi
 if [ -n "$MAX_SAMPLES" ]; then
     echo "Max samples: ${MAX_SAMPLES#--max-samples }"
 fi
@@ -148,10 +157,10 @@ python eval_models.py \
     --dtype "$DTYPE" \
     --output-dir results \
     $REASONING \
+    $ONE_SHOT \
     $MAX_SAMPLES
 
 echo ""
 echo "============================================"
 echo "Evaluation Complete"
 echo "============================================"
-

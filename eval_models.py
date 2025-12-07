@@ -37,6 +37,35 @@ PROMPT_SUFFIXES = {
     'embedded': ' The answer is',  # Word problems need guidance
 }
 
+# One-shot exemplars to steer standard models to return a bare answer.
+ONE_SHOT_EXAMPLES = {
+    'numeric': (
+        "7 + 5 = 12\n"
+        "{prompt}"
+    ),
+    'english': (
+        "seven plus five equals twelve\n"
+        "{prompt}"
+    ),
+    'spanish': (
+        "siete más cinco es igual a doce\n"
+        "{prompt}"
+    ),
+    'italian': (
+        "sette più cinque fa dodici\n"
+        "{prompt}"
+    ),
+    'embedded': (
+        "Question: Alice has 3 marbles and finds 2 more. How many does she have now?\n"
+        "Answer: 5\n"
+        "{prompt}"
+    ),
+    'default': (
+        "2 + 2 = 4\n"
+        "{prompt}"
+    ),
+}
+
 
 def load_dataset(dataset_path: str, split: str = 'test') -> list:
     """Load dataset and filter by split"""
@@ -62,6 +91,14 @@ def normalize_answer(answer: str, dataset_type: str) -> str:
         answer = re.sub(r'[^\w\s-]', '', answer)
         answer = ' '.join(answer.split())
         return answer
+
+
+def build_standard_prompt(prompt: str, dataset_type: str, one_shot: bool) -> str:
+    """Optionally prepend a one-shot example to steer concise answers."""
+    if not one_shot:
+        return prompt
+    exemplar = ONE_SHOT_EXAMPLES.get(dataset_type, ONE_SHOT_EXAMPLES['default'])
+    return exemplar.format(prompt=prompt)
 
 
 def extract_answer_standard(text: str, dataset_type: str) -> str:
@@ -132,7 +169,8 @@ def check_answer(predicted: str, expected: str, dataset_type: str) -> bool:
 
 def evaluate_standard(model, tokenizer, dataset: list, dataset_type: str,
                       max_new_tokens: int = 8,
-                      log_every: int = 100) -> dict:
+                      log_every: int = 100,
+                      one_shot: bool = False) -> dict:
     """Evaluate standard (non-reasoning) LLM"""
     results = []
     correct = 0
@@ -141,10 +179,11 @@ def evaluate_standard(model, tokenizer, dataset: list, dataset_type: str,
     
     for idx, item in enumerate(tqdm(dataset, desc=f"Evaluating {dataset_type}")):
         prompt = item['prompt'] + suffix
+        full_prompt = build_standard_prompt(prompt, dataset_type, one_shot)
         expected = item['answer']
         
         # Tokenize
-        inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
+        inputs = tokenizer(full_prompt, return_tensors="pt").to(model.device)
         
         # Generate
         with torch.no_grad():
@@ -170,7 +209,7 @@ def evaluate_standard(model, tokenizer, dataset: list, dataset_type: str,
         results.append({
             'id': item['id'],
             'prompt': item['prompt'],
-            'full_prompt': prompt,
+            'full_prompt': full_prompt,
             'expected': expected.strip(),
             'generated': generated,
             'predicted': predicted,
@@ -181,7 +220,7 @@ def evaluate_standard(model, tokenizer, dataset: list, dataset_type: str,
         if (idx + 1) % log_every == 0:
             seen = idx + 1
             acc_so_far = correct / seen if seen else 0.0
-            print(f"[progress] {dataset_type}: {seen}/{len(dataset)} processed, acc={acc_so_far*100:.2f}%")
+            print(f"[progress] {dataset_type}: {seen}/{len(dataset)} processed, acc={acc_so_far*100:.2f}%", flush = True)
     
     accuracy = correct / len(dataset) if dataset else 0
     
@@ -238,8 +277,34 @@ def build_system_prompt(dataset_type: str) -> str:
     )
 
 
+def _build_reasoning_length_kwargs(max_new_tokens, model, tokenizer, input_len: int) -> dict:
+    """Return generation length kwargs with no hard cap unless explicitly provided."""
+    if max_new_tokens is not None:
+        return {"max_new_tokens": max_new_tokens}
+
+    # Prefer model context window; fallback to tokenizer hint; ignore absurd sentinels.
+    candidates = []
+    max_pos = getattr(model.config, "max_position_embeddings", None)
+    tok_limit = getattr(tokenizer, "model_max_length", None)
+    for val in (max_pos, tok_limit):
+        if val is None:
+            continue
+        if isinstance(val, float) and val == float("inf"):
+            continue
+        if val > 0 and val < 10_000_000:  # skip gigantic sentinel defaults
+            candidates.append(val)
+
+    if candidates:
+        max_length = max(input_len + 1, min(candidates))
+    else:
+        # If we have no reliable context info, allow plenty of room.
+        max_length = input_len + 4096
+
+    return {"max_length": max_length}
+
+
 def evaluate_reasoning(model, tokenizer, dataset: list, dataset_type: str,
-                       max_new_tokens: int = 1024,
+                       max_new_tokens=None,
                        log_every: int = 100) -> dict:
     """Evaluate reasoning LLM with chat template"""
     results = []
@@ -247,8 +312,10 @@ def evaluate_reasoning(model, tokenizer, dataset: list, dataset_type: str,
     
     # System prompt for reasoning models, adapted per dataset type
     system_prompt = build_system_prompt(dataset_type)
-    
-    for idx, item in enumerate(tqdm(dataset, desc=f"Evaluating {dataset_type} (reasoning)")):
+
+    pbar = tqdm(total=len(dataset), desc=f"Evaluating {dataset_type} (reasoning)", smoothing=0)
+
+    for idx, item in enumerate(dataset):
         prompt = item['prompt']
         expected = item['answer']
         
@@ -278,16 +345,17 @@ def evaluate_reasoning(model, tokenizer, dataset: list, dataset_type: str,
             input_len = inputs['input_ids'].shape[1]
         
         # Generate
+        length_kwargs = _build_reasoning_length_kwargs(max_new_tokens, model, tokenizer, input_len)
         with torch.no_grad():
             outputs = model.generate(
                 **inputs,
-                max_new_tokens=max_new_tokens,
                 do_sample=False,
                 temperature=None,
                 top_p=None,
                 top_k=None,
                 pad_token_id=tokenizer.eos_token_id,
                 eos_token_id=tokenizer.eos_token_id,
+                **length_kwargs,
             )
         
         # Decode full response (includes reasoning)
@@ -309,11 +377,13 @@ def evaluate_reasoning(model, tokenizer, dataset: list, dataset_type: str,
             'correct': is_correct,
         })
 
-        # Periodic logging
-        if (idx + 1) % log_every == 0:
-            seen = idx + 1
-            acc_so_far = correct / seen if seen else 0.0
-            print(f"[progress] {dataset_type}: {seen}/{len(dataset)} processed, acc={acc_so_far*100:.2f}%")
+        # Running accuracy after every example (displayed in tqdm)
+        seen = idx + 1
+        acc_so_far = correct / seen if seen else 0.0
+        pbar.set_postfix_str(f"acc={acc_so_far*100:.2f}%")
+        pbar.update(1)
+
+    pbar.close()
     
     accuracy = correct / len(dataset) if dataset else 0
     
@@ -378,8 +448,10 @@ def main():
                         help='Maximum samples to evaluate (for quick testing)')
     parser.add_argument('--max-new-tokens', type=int, default=8,
                         help='Max new tokens for standard mode')
-    parser.add_argument('--max-new-tokens-reasoning', type=int, default=1024,
-                        help='Max new tokens for reasoning mode')
+    parser.add_argument('--max-new-tokens-reasoning', type=int, default=None,
+                        help='Max new tokens for reasoning mode (default: use full context window)')
+    parser.add_argument('--one-shot', action='store_true',
+                        help='Prepend a one-shot example to standard prompts to reinforce answer format')
     parser.add_argument('--log-every', type=int, default=100,
                         help='Log interim accuracy every N samples')
     parser.add_argument('--output-dir', type=str, default='results',
@@ -403,6 +475,8 @@ def main():
     print(f"Mode: {'reasoning' if args.reasoning else 'standard'}")
     print(f"Datasets: {', '.join(datasets_to_eval)}")
     print(f"Split: {args.split}")
+    if args.one_shot and not args.reasoning:
+        print("One-shot prompting: enabled for standard mode")
     if args.max_samples:
         print(f"Max samples: {args.max_samples}")
     print()
@@ -468,6 +542,7 @@ def main():
                 model, tokenizer, dataset, dataset_type,
                 max_new_tokens=args.max_new_tokens,
                 log_every=args.log_every,
+                one_shot=args.one_shot,
             )
         
         # Save results
@@ -520,4 +595,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
