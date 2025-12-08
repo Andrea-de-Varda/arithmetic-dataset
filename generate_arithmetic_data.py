@@ -564,7 +564,7 @@ def split_dataset(problems: List[Dict],
     return problems
 
 
-def save_dataset_helm(problems: List[Dict], output_prefix: str):
+def save_dataset_helm(problems: List[Dict], output_prefix: str, target_formats: List[str] = None):
     """
     Save dataset in HELM (Holistic Evaluation of Language Models) format
 
@@ -581,6 +581,7 @@ def save_dataset_helm(problems: List[Dict], output_prefix: str):
     base_dir = os.path.join('data', 'HELM')
     os.makedirs(base_dir, exist_ok=True)
     
+
     # Add 'HELM' to filenames to clearly indicate the format
     filenames = {
         'numeric': os.path.join(base_dir, f'{output_prefix}_HELM_numeric.jsonl'),
@@ -602,6 +603,9 @@ def save_dataset_helm(problems: List[Dict], output_prefix: str):
 
     # Create HELM instances for each format
     for format_key, filename in filenames.items():
+        if target_formats and 'all' not in target_formats and format_key not in target_formats:
+            continue
+
         with open(filename, 'w', encoding='utf-8') as f:
             for problem in problems:
                 # Get prompt and answer based on format
@@ -640,7 +644,7 @@ def save_dataset_helm(problems: List[Dict], output_prefix: str):
     _print_dataset_statistics(problems)
 
 
-def save_dataset(problems: List[Dict], output_prefix: str):
+def save_dataset(problems: List[Dict], output_prefix: str, target_formats: List[str] = None):
     """
     Save dataset in 4 formats: numeric, English, Spanish, Italian
     
@@ -664,20 +668,23 @@ def save_dataset(problems: List[Dict], output_prefix: str):
     
     for problem in problems:
         # Numeric format
-        numeric_prompt, numeric_answer = formatter.format_numeric(problem)
-        datasets['numeric'].append({
-            'id': problem['id'],
-            'prompt': numeric_prompt,
-            'answer': numeric_answer,
-            'ground_truth': problem['result'],
-            'split': problem['split'],
-            'has_carry': problem['has_carry'],
-            'n_terms': problem['n_terms'],
-            'n_digits': problem['n_digits']
-        })
+        if not target_formats or 'all' in target_formats or 'numeric' in target_formats:
+            numeric_prompt, numeric_answer = formatter.format_numeric(problem)
+            datasets['numeric'].append({
+                'id': problem['id'],
+                'prompt': numeric_prompt,
+                'answer': numeric_answer,
+                'ground_truth': problem['result'],
+                'split': problem['split'],
+                'has_carry': problem['has_carry'],
+                'n_terms': problem['n_terms'],
+                'n_digits': problem['n_digits']
+            })
         
         # Verbal formats (English, Spanish, Italian)
         for lang in ['en', 'es', 'it']:
+            if target_formats and 'all' not in target_formats and lang not in target_formats:
+                continue
             verbal_prompt, verbal_answer = formatter.format_verbal(problem, language=lang)
             datasets[lang].append({
                 'id': problem['id'],
@@ -691,30 +698,32 @@ def save_dataset(problems: List[Dict], output_prefix: str):
             })
         
         # Embedded-in-context format
-        embedded_prompt, embedded_answer = formatter.format_embedded_context(problem)
-        datasets['embedded'].append({
-            'id': problem['id'],
-            'prompt': embedded_prompt,
-            'answer': embedded_answer,
-            'ground_truth': problem['result'],
-            'split': problem['split'],
-            'has_carry': problem['has_carry'],
-            'n_terms': problem['n_terms'],
-            'n_digits': problem['n_digits']
-        })
+        if not target_formats or 'all' in target_formats or 'embedded' in target_formats:
+            embedded_prompt, embedded_answer = formatter.format_embedded_context(problem)
+            datasets['embedded'].append({
+                'id': problem['id'],
+                'prompt': embedded_prompt,
+                'answer': embedded_answer,
+                'ground_truth': problem['result'],
+                'split': problem['split'],
+                'has_carry': problem['has_carry'],
+                'n_terms': problem['n_terms'],
+                'n_digits': problem['n_digits']
+            })
 
         # Embedded-in-context verbal format
-        embedded_verbal_prompt, embedded_verbal_answer = formatter.format_embedded_context(problem, verbal=True)
-        datasets['embedded_verbal'].append({
-            'id': problem['id'],
-            'prompt': embedded_verbal_prompt,
-            'answer': embedded_verbal_answer,
-            'ground_truth': problem['result'],
-            'split': problem['split'],
-            'has_carry': problem['has_carry'],
-            'n_terms': problem['n_terms'],
-            'n_digits': problem['n_digits']
-        })
+        if not target_formats or 'all' in target_formats or 'embedded_verbal' in target_formats:
+            embedded_verbal_prompt, embedded_verbal_answer = formatter.format_embedded_context(problem, verbal=True)
+            datasets['embedded_verbal'].append({
+                'id': problem['id'],
+                'prompt': embedded_verbal_prompt,
+                'answer': embedded_verbal_answer,
+                'ground_truth': problem['result'],
+                'split': problem['split'],
+                'has_carry': problem['has_carry'],
+                'n_terms': problem['n_terms'],
+                'n_digits': problem['n_digits']
+            })
     
     # Ensure target directory exists: data/json/
     base_dir = os.path.join('data', 'json')
@@ -731,6 +740,8 @@ def save_dataset(problems: List[Dict], output_prefix: str):
     }
     
     for format_name, dataset in datasets.items():
+        if target_formats and 'all' not in target_formats and format_name not in target_formats:
+            continue
         filename = filenames[format_name]
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump(dataset, f, ensure_ascii=False, indent=2)
@@ -808,6 +819,11 @@ def main():
                         choices=['json', 'helm'],
                         help='Output format: json (standard JSON arrays) or helm (JSONL format)')
     
+    # New argument to select specific formats
+    parser.add_argument('--formats', type=str, nargs='+', default=['all'],
+                        choices=['all', 'numeric', 'en', 'es', 'it', 'embedded', 'embedded_verbal'],
+                        help='Specific problem formats to generate (default: all)')
+    
     # Other
     parser.add_argument('--seed', type=int, default=None,
                         help='Random seed for reproducibility')
@@ -830,6 +846,7 @@ def main():
     print(f"  Avoid clean multiples: {args.avoid_clean_multiples}")
     print(f"  Avoid reverse pairs: {args.avoid_reverse_pairs}")
     print(f"  Output format: {args.output_format.upper()}")
+    print(f"  Target formats: {', '.join(args.formats)}")
     print(f"  Random seed: {args.seed if args.seed else 'None'}")
     print()
     
@@ -860,9 +877,9 @@ def main():
     # Save datasets in the appropriate format
     print("\nSaving datasets...")
     if args.output_format == 'helm':
-        save_dataset_helm(problems, args.output_prefix)
+        save_dataset_helm(problems, args.output_prefix, args.formats)
     else:
-        save_dataset(problems, args.output_prefix)
+        save_dataset(problems, args.output_prefix, args.formats)
     
     print("\n=== Done! ===")
 
