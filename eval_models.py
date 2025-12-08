@@ -25,6 +25,7 @@ DATASETS = {
     'spanish': 'data/json/arith_dataset_spanish.json',
     'italian': 'data/json/arith_dataset_italian.json',
     'embedded': 'data/json/arith_dataset_embedded.json',
+    'embedded_verbal': 'data/json/arith_dataset_embedded_verbal.json',
 }
 
 # Prompt suffixes for standard LLMs (to guide answer generation)
@@ -35,6 +36,7 @@ PROMPT_SUFFIXES = {
     'spanish': '',       # ends with "es igual a"
     'italian': '',       # ends with "fa"
     'embedded': ' The answer is',  # Word problems need guidance
+    'embedded_verbal': ' The answer is',  # Word problems need guidance
 }
 
 # One-shot exemplars to steer standard models to return a bare answer.
@@ -56,6 +58,11 @@ ONE_SHOT_EXAMPLES = {
         "{prompt}"
     ),
     'embedded': (
+        "Question: Alice has 3 marbles and finds 2 more. How many does she have now?\n"
+        "Answer: 5\n"
+        "{prompt}"
+    ),
+    'embedded_verbal': (
         "Question: Alice has 3 marbles and finds 2 more. How many does she have now?\n"
         "Answer: 5\n"
         "{prompt}"
@@ -85,7 +92,7 @@ def normalize_answer(answer: str, dataset_type: str) -> str:
             return match.group()
         return answer
     else:
-        # For verbal (english/spanish/italian), lowercase and clean
+        # For verbal (english/spanish/italian/embedded_verbal), lowercase and clean
         # Remove punctuation, extra spaces
         answer = answer.lower().strip()
         answer = re.sub(r'[^\w\s-]', '', answer)
@@ -99,7 +106,6 @@ def build_standard_prompt(prompt: str, dataset_type: str, one_shot: bool) -> str
         return prompt
     exemplar = ONE_SHOT_EXAMPLES.get(dataset_type, ONE_SHOT_EXAMPLES['default'])
     return exemplar.format(prompt=prompt)
-
 
 def extract_answer_standard(text: str, dataset_type: str) -> str:
     """Extract the answer from standard model output"""
@@ -117,7 +123,6 @@ def extract_answer_standard(text: str, dataset_type: str) -> str:
         text = text.split('\n')[0]
         text = re.split(r'[.!?]', text)[0]
         return text.strip()
-
 
 def extract_answer_reasoning(text: str, dataset_type: str) -> str:
     """Extract final answer from reasoning model output"""
@@ -247,6 +252,13 @@ def build_system_prompt(dataset_type: str) -> str:
             "Think step by step, then provide ONLY the final numeric result. "
             "Your final answer MUST be on its own line in exactly this format:\n"
             "ANSWER: <number>"
+        )
+    if dataset_type == 'embedded_verbal':
+        return (
+            "You are a helpful assistant that solves short word problems in English about counts of objects. "
+            "Think step by step, then provide ONLY final answer written in English words (no punctuation). "
+            "Your final answer MUST be on its own line in exactly this format:\n"
+            "ANSWER: <english words>"
         )
     if dataset_type == 'english':
         return (
@@ -437,7 +449,7 @@ def main():
     parser.add_argument('--model', type=str, required=True,
                         help='HuggingFace model name or path')
     parser.add_argument('--dataset', type=str, default='all',
-                        choices=['all', 'numeric', 'english', 'spanish', 'italian', 'embedded'],
+                        choices=['all', 'numeric', 'english', 'spanish', 'italian', 'embedded', 'embedded_verbal'],
                         help='Dataset to evaluate on')
     parser.add_argument('--reasoning', action='store_true',
                         help='Use reasoning mode with chat template (for reasoning LLMs)')
