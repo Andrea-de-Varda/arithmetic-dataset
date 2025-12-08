@@ -390,7 +390,7 @@ class DatasetFormatter:
         return prompt, answer
     
     @staticmethod
-    def format_embedded_context(problem: Dict) -> Tuple[str, str]:
+    def format_embedded_context(problem: Dict, verbal: bool = False) -> Tuple[str, str]:
         """Format as embedded-in-context (short story word problem)"""
         # Define possible characters, objects, and templates
         characters = ["Alex", "Emma", "Noah", "Olivia", "Liam", "Sophia", "Jackson", "Ava",
@@ -440,6 +440,10 @@ class DatasetFormatter:
         operators = problem['operators']
         result = problem['result']
         
+        # Helper to format numbers
+        def fmt_num(n):
+            return num2words(n, lang='en') if verbal else n
+        
         # Select random characters and object using a stable, deterministic seed
         # Seed is derived from problem id (if available), operands and operators
         seed_source = f"{problem.get('id', '')}|{operands}|{operators}"
@@ -457,19 +461,19 @@ class DatasetFormatter:
         # Handle different operation types
         if len(operators) == 1 and operators[0] == '+':
             # Simple addition (2 terms)
-            num1, num2 = operands[0], operands[1]
+            num1, num2 = fmt_num(operands[0]), fmt_num(operands[1])
             template = temp_rng.choice(addition_templates)
             prompt = template.format(char1=char1, char2=char2, num1=num1, num2=num2, obj_plural=obj_plural)
-            answer = f' {result}'
+            answer = f' {fmt_num(result)}'
             
         elif len(operators) == 2 and operators[0] == '+' and operators[1] == '+':
             # Three-term addition
-            num1, num2, num3 = operands[0], operands[1], operands[2]
+            num1, num2, num3 = fmt_num(operands[0]), fmt_num(operands[1]), fmt_num(operands[2])
             char3 = temp_rng.choice(characters)
             while char3 == char1 or char3 == char2:
                 char3 = temp_rng.choice(characters)
             prompt = f"{char1} has {num1} {obj_plural}, {char2} has {num2} {obj_plural}, and {char3} has {num3} {obj_plural}. How many {obj_plural} do they have in total?"
-            answer = f' {result}'
+            answer = f' {fmt_num(result)}'
             
         elif len(operators) == 1 and operators[0] == '-':
             # Simple subtraction (2 terms)
@@ -485,37 +489,37 @@ class DatasetFormatter:
                     # Answer: initial amount = num_total - num2 = result
                     actual_answer = result
                     num2_value = num_total - result  # This is the amount they got
-                    prompt = template.format(char1=char1, char2=char2, num1=result, num2=num2_value, num_total=num_total, obj_plural=obj_plural)
-                    answer = f' {actual_answer}'
+                    prompt = template.format(char1=char1, char2=char2, num1=fmt_num(result), num2=fmt_num(num2_value), num_total=fmt_num(num_total), obj_plural=obj_plural)
+                    answer = f' {fmt_num(actual_answer)}'
                 else:
                     # Template A: "After giving some, had {num1} left. How many did give?"
                     # Answer: amount given = num_total - result = num2
                     actual_answer = num_total - result  # This is num2
-                    prompt = template.format(char1=char1, char2=char2, num1=result, num2=actual_answer, num_total=num_total, obj_plural=obj_plural)
-                    answer = f' {actual_answer}'
+                    prompt = template.format(char1=char1, char2=char2, num1=fmt_num(result), num2=fmt_num(actual_answer), num_total=fmt_num(num_total), obj_plural=obj_plural)
+                    answer = f' {fmt_num(actual_answer)}'
             else:
                 # Standard subtraction
-                prompt = template.format(char1=char1, char2=char2, num1=num1, num2=num2, num_total=num_total, obj_plural=obj_plural)
-                answer = f' {result}'
+                prompt = template.format(char1=char1, char2=char2, num1=fmt_num(num1), num2=fmt_num(num2), num_total=fmt_num(num_total), obj_plural=obj_plural)
+                answer = f' {fmt_num(result)}'
                 
         else:
             # Three-term mixed operations
             if operators[0] == '+' and operators[1] == '-':
-                num1, num2, num3 = operands[0], operands[1], operands[2]
+                num1, num2, num3 = fmt_num(operands[0]), fmt_num(operands[1]), fmt_num(operands[2])
                 prompt = f"{char1} had {num1} {obj_plural}. {char2} gave {char1} {num2} more {obj_plural}. Then {char1} gave {num3} {obj_plural} away. How many {obj_plural} does {char1} have now?"
-                answer = f' {result}'
+                answer = f' {fmt_num(result)}'
             elif operators[0] == '-' and operators[1] == '+':
-                num1, num2, num3 = operands[0], operands[1], operands[2]
+                num1, num2, num3 = fmt_num(operands[0]), fmt_num(operands[1]), fmt_num(operands[2])
                 prompt = f"{char1} had {num1} {obj_plural}. {char1} gave {num2} {obj_plural} to {char2}. Then {char1} found {num3} more {obj_plural}. How many {obj_plural} does {char1} have now?"
-                answer = f' {result}'
+                answer = f' {fmt_num(result)}'
             elif operators[0] == '-' and operators[1] == '-':
-                num1, num2, num3 = operands[0], operands[1], operands[2]
+                num1, num2, num3 = fmt_num(operands[0]), fmt_num(operands[1]), fmt_num(operands[2])
                 prompt = f"{char1} had {num1} {obj_plural}. {char1} gave {num2} {obj_plural} to {char2} and {num3} {obj_plural} to another friend. How many {obj_plural} does {char1} have left?"
-                answer = f' {result}'
+                answer = f' {fmt_num(result)}'
             else:
                 # Fallback
-                prompt = f"{char1} started with {operands[0]} {obj_plural}. After some transactions, {char1} ended up with how many {obj_plural}?"
-                answer = f' {result}'
+                prompt = f"{char1} started with {fmt_num(operands[0])} {obj_plural}. After some transactions, {char1} ended up with how many {obj_plural}?"
+                answer = f' {fmt_num(result)}'
         
         return prompt, answer
 
@@ -583,7 +587,8 @@ def save_dataset_helm(problems: List[Dict], output_prefix: str):
         'en': os.path.join(base_dir, f'{output_prefix}_HELM_english.jsonl'),
         'es': os.path.join(base_dir, f'{output_prefix}_HELM_spanish.jsonl'),
         'it': os.path.join(base_dir, f'{output_prefix}_HELM_italian.jsonl'),
-        'embedded': os.path.join(base_dir, f'{output_prefix}_HELM_embedded.jsonl')
+        'embedded': os.path.join(base_dir, f'{output_prefix}_HELM_embedded.jsonl'),
+        'embedded_verbal': os.path.join(base_dir, f'{output_prefix}_HELM_embedded_verbal.jsonl')
     }
 
     # Language names for metadata
@@ -604,6 +609,8 @@ def save_dataset_helm(problems: List[Dict], output_prefix: str):
                     prompt, answer = formatter.format_numeric(problem)
                 elif format_key == 'embedded':
                     prompt, answer = formatter.format_embedded_context(problem)
+                elif format_key == 'embedded_verbal':
+                    prompt, answer = formatter.format_embedded_context(problem, verbal=True)
                 else:
                     prompt, answer = formatter.format_verbal(problem, language=format_key)
 
@@ -651,7 +658,8 @@ def save_dataset(problems: List[Dict], output_prefix: str):
         'en': [],
         'es': [],
         'it': [],
-        'embedded': []
+        'embedded': [],
+        'embedded_verbal': []
     }
     
     for problem in problems:
@@ -694,6 +702,19 @@ def save_dataset(problems: List[Dict], output_prefix: str):
             'n_terms': problem['n_terms'],
             'n_digits': problem['n_digits']
         })
+
+        # Embedded-in-context verbal format
+        embedded_verbal_prompt, embedded_verbal_answer = formatter.format_embedded_context(problem, verbal=True)
+        datasets['embedded_verbal'].append({
+            'id': problem['id'],
+            'prompt': embedded_verbal_prompt,
+            'answer': embedded_verbal_answer,
+            'ground_truth': problem['result'],
+            'split': problem['split'],
+            'has_carry': problem['has_carry'],
+            'n_terms': problem['n_terms'],
+            'n_digits': problem['n_digits']
+        })
     
     # Ensure target directory exists: data/json/
     base_dir = os.path.join('data', 'json')
@@ -705,7 +726,8 @@ def save_dataset(problems: List[Dict], output_prefix: str):
         'en': os.path.join(base_dir, f'{output_prefix}_english.json'),
         'es': os.path.join(base_dir, f'{output_prefix}_spanish.json'),
         'it': os.path.join(base_dir, f'{output_prefix}_italian.json'),
-        'embedded': os.path.join(base_dir, f'{output_prefix}_embedded.json')
+        'embedded': os.path.join(base_dir, f'{output_prefix}_embedded.json'),
+        'embedded_verbal': os.path.join(base_dir, f'{output_prefix}_embedded_verbal.json')
     }
     
     for format_name, dataset in datasets.items():
