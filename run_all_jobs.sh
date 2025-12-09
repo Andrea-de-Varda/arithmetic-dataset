@@ -4,8 +4,8 @@
 
 set -euo pipefail
 
-sbatch eval_models.sh --modelname meta-llama/Llama-3.2-3B --one-shot --dataset embedded_verbal
 sbatch eval_models.sh --modelname meta-llama/Llama-3.2-1B --one-shot --dataset embedded_verbal
+sbatch eval_models.sh --modelname meta-llama/Llama-3.2-3B --one-shot --dataset embedded_verbal
 sbatch eval_models.sh --modelname meta-llama/Llama-3.1-8B --one-shot --dataset embedded_verbal
 sbatch eval_models.sh --modelname Qwen/Qwen3-8B --one-shot --dataset embedded_verbal
 sbatch eval_models.sh --modelname Qwen/Qwen3-4B --one-shot --dataset embedded_verbal

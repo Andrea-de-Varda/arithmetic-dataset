@@ -2,38 +2,14 @@
   "model": "meta-llama/Llama-3.1-8B",
   "mode": "standard",
   "split": "test",
-  "timestamp": "2025-12-06T17:32:38.165909",
+  "timestamp": "2025-12-08T18:27:43.103961",
   "results": [
     {
-      "dataset": "numeric",
-      "accuracy": 0.9811320754716981,
-      "correct": 988,
-      "total": 1007
-    },
-    {
-      "dataset": "english",
-      "accuracy": 0.32969215491559084,
-      "correct": 332,
-      "total": 1007
-    },
-    {
-      "dataset": "spanish",
-      "accuracy": 0.2770605759682224,
-      "correct": 279,
-      "total": 1007
-    },
-    {
-      "dataset": "italian",
-      "accuracy": 0.16484607745779542,
-      "correct": 166,
-      "total": 1007
-    },
-    {
-      "dataset": "embedded",
-      "accuracy": 0.8003972194637538,
-      "correct": 806,
+      "dataset": "embedded_verbal",
+      "accuracy": 0.1529294935451837,
+      "correct": 154,
       "total": 1007
     }
   ],
-  "average_accuracy": 0.5106256206554122
+  "average_accuracy": 0.1529294935451837
 }

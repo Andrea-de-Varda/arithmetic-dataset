@@ -422,7 +422,7 @@ def main():
                         choices=["standard", "reasoning"],
                         help="Evaluation mode to plot")
     parser.add_argument("--datasets", type=str, nargs="+",
-                        default=["numeric", "english", "spanish", "italian", "embedded"],
+                        default=["numeric", "english", "spanish", "italian", "embedded", "embedded_verbal"],
                         help="Datasets/conditions to plot")
     parser.add_argument("--output-dir", type=Path, default=Path("plots"),
                         help="Directory to save figures")

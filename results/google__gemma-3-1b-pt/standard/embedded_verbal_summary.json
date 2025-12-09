@@ -1,0 +1,9 @@
+{
+  "model": "google/gemma-3-1b-pt",
+  "dataset": "embedded_verbal",
+  "mode": "standard",
+  "accuracy": 0.0,
+  "correct": 0,
+  "total": 1007,
+  "timestamp": "2025-12-08T18:34:39.305775"
+}

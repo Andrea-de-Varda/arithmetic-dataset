@@ -63,8 +63,8 @@ ONE_SHOT_EXAMPLES = {
         "{prompt}"
     ),
     'embedded_verbal': (
-        "Question: Alice has 3 marbles and finds 2 more. How many does she have now?\n"
-        "Answer: 5\n"
+        "Question: Alice has three marbles and finds two more. How many does she have now?\n"
+        "Answer: five\n"
         "{prompt}"
     ),
     'default': (

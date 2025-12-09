@@ -1,0 +1,9 @@
+{
+  "model": "Qwen/Qwen3-32B",
+  "dataset": "embedded_verbal",
+  "mode": "standard",
+  "accuracy": 0.028798411122144985,
+  "correct": 29,
+  "total": 1007,
+  "timestamp": "2025-12-08T18:38:11.684320"
+}

@@ -2,38 +2,14 @@
   "model": "google/gemma-3-1b-pt",
   "mode": "standard",
   "split": "test",
-  "timestamp": "2025-12-06T18:31:51.876348",
+  "timestamp": "2025-12-08T18:34:39.306802",
   "results": [
     {
-      "dataset": "numeric",
-      "accuracy": 0.3386295928500497,
-      "correct": 341,
-      "total": 1007
-    },
-    {
-      "dataset": "english",
-      "accuracy": 0.03574975173783516,
-      "correct": 36,
-      "total": 1007
-    },
-    {
-      "dataset": "spanish",
-      "accuracy": 0.009930486593843098,
-      "correct": 10,
-      "total": 1007
-    },
-    {
-      "dataset": "italian",
-      "accuracy": 0.013902681231380337,
-      "correct": 14,
-      "total": 1007
-    },
-    {
-      "dataset": "embedded",
-      "accuracy": 0.03574975173783516,
-      "correct": 36,
+      "dataset": "embedded_verbal",
+      "accuracy": 0.0,
+      "correct": 0,
       "total": 1007
     }
   ],
-  "average_accuracy": 0.08679245283018869
+  "average_accuracy": 0.0
 }

@@ -2,14 +2,14 @@
   "model": "meta-llama/Llama-3.2-3B",
   "mode": "standard",
   "split": "test",
-  "timestamp": "2025-12-08T18:10:43.063999",
+  "timestamp": "2025-12-08T18:26:39.744714",
   "results": [
     {
       "dataset": "embedded_verbal",
-      "accuracy": 0.0,
-      "correct": 0,
+      "accuracy": 0.031777557100297914,
+      "correct": 32,
       "total": 1007
     }
   ],
-  "average_accuracy": 0.0
+  "average_accuracy": 0.031777557100297914
 }

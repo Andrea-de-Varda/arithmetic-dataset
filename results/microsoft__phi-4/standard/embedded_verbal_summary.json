@@ -1,0 +1,9 @@
+{
+  "model": "microsoft/phi-4",
+  "dataset": "embedded_verbal",
+  "mode": "standard",
+  "accuracy": 0.2711022840119166,
+  "correct": 273,
+  "total": 1007,
+  "timestamp": "2025-12-08T18:43:55.766958"
+}
